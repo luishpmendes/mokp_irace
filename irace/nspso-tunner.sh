@@ -13,7 +13,7 @@ PARAMS=("$@")
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SOLVER="${PROJECT_DIR}/bin/exec/nspso_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
-TIME_LIMIT=60
+TIME_LIMIT=300
 
 TMPDIR=$(mktemp -d)
 trap "rm -rf $TMPDIR" EXIT

@@ -13,7 +13,7 @@ PARAMS=("$@")
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SOLVER="${PROJECT_DIR}/bin/exec/mhaco_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
-TIME_LIMIT=60
+TIME_LIMIT=300
 
 TMPDIR=$(mktemp -d)
 trap "rm -rf $TMPDIR" EXIT
@@ -42,6 +42,7 @@ START_TIME=$(date +%s.%N)
     --seed "$SEED" \
     --time-limit "$TIME_LIMIT" \
     --pareto "$PARETO_FILE" \
+    --memory \
     "${TRANSFORMED_PARAMS[@]}" > /dev/null 2>&1
 
 SOLVER_EXIT=$?

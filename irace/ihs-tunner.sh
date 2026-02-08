@@ -3,9 +3,6 @@
 # IHS Target Runner for iRace
 ###############################################################################
 
-# Ensure consistent decimal handling across locales
-export LC_NUMERIC=C
-
 CONFIG_ID="$1"
 INSTANCE_ID="$2"
 SEED="$3"
@@ -16,7 +13,7 @@ PARAMS=("$@")
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SOLVER="${PROJECT_DIR}/bin/exec/ihs_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
-TIME_LIMIT=60
+TIME_LIMIT=300
 
 TMPDIR=$(mktemp -d)
 trap "rm -rf $TMPDIR" EXIT

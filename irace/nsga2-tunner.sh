@@ -21,7 +21,7 @@ SOLVER="${PROJECT_DIR}/bin/exec/nsga2_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
 
 # Time limit per run (seconds)
-TIME_LIMIT=60
+TIME_LIMIT=300
 
 # Create temporary directory for this run
 TMPDIR=$(mktemp -d)
@@ -37,8 +37,7 @@ i=0
 while [ $i -lt ${#PARAMS[@]} ]; do
     if [ "${PARAMS[$i]}" = "--population-size-factor" ]; then
         FACTOR="${PARAMS[$((i+1))]}"
-        # For MOKP, population size = factor * num_dimensions
-        # We use a base multiplier of 4 (2^num_dimensions for 2D)
+        # Population size = factor * 4
         POPULATION_SIZE=$((FACTOR * 4))
         TRANSFORMED_PARAMS+=("--population-size" "$POPULATION_SIZE")
         i=$((i + 2))

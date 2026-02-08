@@ -13,7 +13,7 @@ PARAMS=("$@")
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SOLVER="${PROJECT_DIR}/bin/exec/moead_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
-TIME_LIMIT=60
+TIME_LIMIT=300
 
 TMPDIR=$(mktemp -d)
 trap "rm -rf $TMPDIR" EXIT
@@ -30,6 +30,23 @@ while [ $i -lt ${#PARAMS[@]} ]; do
         POPULATION_SIZE=$((FACTOR * 4))
         TRANSFORMED_PARAMS+=("--population-size" "$POPULATION_SIZE")
         i=$((i + 2))
+    elif [ "${PARAMS[$i]}" = "--weight-generation" ]; then
+        # Handle weight-generation values that may contain spaces
+        VALUE="${PARAMS[$((i+1))]}"
+        # Check if the next word is part of a multi-word value
+        if [ "$VALUE" = "low" ] && [ "${PARAMS[$((i+2))]}" = "discrepancy" ]; then
+            TRANSFORMED_PARAMS+=("--weight-generation" "low discrepancy")
+            i=$((i + 3))
+        else
+            # Single word value (grid, random)
+            TRANSFORMED_PARAMS+=("--weight-generation" "$VALUE")
+            i=$((i + 2))
+        fi
+    elif [ "${PARAMS[$i]}" = "--decomposition" ]; then
+        # Handle decomposition values (all single words: weighted, tchebycheff, bi)
+        VALUE="${PARAMS[$((i+1))]}"
+        TRANSFORMED_PARAMS+=("--decomposition" "$VALUE")
+        i=$((i + 2))
     else
         TRANSFORMED_PARAMS+=("${PARAMS[$i]}")
         i=$((i + 1))
@@ -43,6 +60,7 @@ START_TIME=$(date +%s.%N)
     --seed "$SEED" \
     --time-limit "$TIME_LIMIT" \
     --pareto "$PARETO_FILE" \
+    --preserve-diversity \
     "${TRANSFORMED_PARAMS[@]}" > /dev/null 2>&1
 
 SOLVER_EXIT=$?
