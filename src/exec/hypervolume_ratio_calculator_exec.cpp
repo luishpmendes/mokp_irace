@@ -262,9 +262,8 @@ int main(int argc, char *argv[]) {
                   << "--pareto-i <pareto_filename> "
                   << "--best-solutions-snapshots-i "
                      "<best_solutions_snapshots_filename> "
-                  << "--hvr-i <hypervolume_filename> "
-                  << "--hvr-snapshots-i <hypervolume_snapshots_filename> "
-                  << std::endl;
+                  << "--hvr-i <hvr_filename> "
+                  << "--hvr-snapshots-i <hvr_snapshots_filename> " << std::endl;
     }
 
     return 0;

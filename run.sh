@@ -217,7 +217,7 @@ i=0
 
 for instance in ${instances[@]}
 do
-    command="${path}/bin/exec/modified_generational_distance_calculator_exec "
+    command="${path}/bin/exec/normalized_modified_generational_distance_calculator_exec "
     command+="--instance ${path}/instances/${instance}.txt "
     command+="--reference-pareto ${path}/pareto/${instance}.txt "
     j=0;
@@ -227,8 +227,8 @@ do
         do
             command+="--pareto-${j} ${path}/pareto/${instance}_${solver}_${seed}.txt "
             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/${instance}_${solver}_${seed}_ "
-            command+="--nigd-plus-${j} ${path}/igd_plus/${instance}_${solver}_${seed}.txt "
-            command+="--nigd-plus-snapshots-${j} ${path}/igd_plus_snapshots/${instance}_${solver}_${seed}.txt "
+            command+="--nigd-plus-${j} ${path}/nigd_plus/${instance}_${solver}_${seed}.txt "
+            command+="--nigd-plus-snapshots-${j} ${path}/nigd_plus_snapshots/${instance}_${solver}_${seed}.txt "
             j=$((j+1))
         done
     done
@@ -258,57 +258,57 @@ eval $final_command
 
 wait
 
-commands=()
+# commands=()
 
-for ((i=0;i<num_processes;i++))
-do
-    commands[$i]="("
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     commands[$i]="("
+# done
 
-i=0
+# i=0
 
-for instance in ${instances[@]}
-do
-    command="${path}/bin/exec/multiplicative_epsilon_calculator_exec "
-    command+="--instance ${path}/instances/${instance}.txt "
-    command+="--reference-pareto ${path}/pareto/${instance}.txt "
-    j=0;
-    for solver in ${solvers[@]}
-    do
-        for seed in ${seeds[@]}
-        do
-            command+="--pareto-${j} ${path}/pareto/${instance}_${solver}_${seed}.txt "
-            command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/${instance}_${solver}_${seed}_ "
-            command+="--multiplicative-epsilon-${j} ${path}/multiplicative_epsilon/${instance}_${solver}_${seed}.txt "
-            command+="--multiplicative-epsilon-snapshots-${j} ${path}/multiplicative_epsilon_snapshots/${instance}_${solver}_${seed}.txt "
-            j=$((j+1))
-        done
-    done
-    if [ $i -lt $num_processes ]
-    then
-        commands[$i]+="$command"
-    else
-        commands[$((i%num_processes))]+=" && $command"
-    fi
-    i=$((i+1))
-done
+# for instance in ${instances[@]}
+# do
+#     command="${path}/bin/exec/multiplicative_epsilon_calculator_exec "
+#     command+="--instance ${path}/instances/${instance}.txt "
+#     command+="--reference-pareto ${path}/pareto/${instance}.txt "
+#     j=0;
+#     for solver in ${solvers[@]}
+#     do
+#         for seed in ${seeds[@]}
+#         do
+#             command+="--pareto-${j} ${path}/pareto/${instance}_${solver}_${seed}.txt "
+#             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/${instance}_${solver}_${seed}_ "
+#             command+="--multiplicative-epsilon-${j} ${path}/multiplicative_epsilon/${instance}_${solver}_${seed}.txt "
+#             command+="--multiplicative-epsilon-snapshots-${j} ${path}/multiplicative_epsilon_snapshots/${instance}_${solver}_${seed}.txt "
+#             j=$((j+1))
+#         done
+#     done
+#     if [ $i -lt $num_processes ]
+#     then
+#         commands[$i]+="$command"
+#     else
+#         commands[$((i%num_processes))]+=" && $command"
+#     fi
+#     i=$((i+1))
+# done
 
-for ((i=0;i<num_processes;i++))
-do
-    commands[$i]+=") &>> ${path}/log_${i}.txt"
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     commands[$i]+=") &>> ${path}/log_${i}.txt"
+# done
 
-final_command=""
+# final_command=""
 
-for ((i=0;i<num_processes;i++))
-do
-    command=${commands[$i]}
-    final_command+="$command & "
-done
+# for ((i=0;i<num_processes;i++))
+# do
+#     command=${commands[$i]}
+#     final_command+="$command & "
+# done
 
-eval $final_command
+# eval $final_command
 
-wait
+# wait
 
 commands=()
 
@@ -326,8 +326,8 @@ do
         command="${path}/bin/exec/results_aggregator_exec "
         command+="--hvrs ${path}/hvr/${instance}_${solver}.txt "
         command+="--hvr-statistics ${path}/hvr/${instance}_${solver}_stats.txt "
-        command+="--nigd-pluses ${path}/igd_plus/${instance}_${solver}.txt "
-        command+="--nigd-pluses-statistics ${path}/igd_plus/${instance}_${solver}_stats.txt "
+        command+="--nigd-pluses ${path}/nigd_plus/${instance}_${solver}.txt "
+        command+="--nigd-pluses-statistics ${path}/nigd_plus/${instance}_${solver}_stats.txt "
         command+="--statistics-best ${path}/statistics/${instance}_${solver}_best.txt "
         command+="--statistics-median ${path}/statistics/${instance}_${solver}_median.txt "
         command+="--pareto-best ${path}/pareto/${instance}_${solver}_best.txt "
@@ -354,8 +354,8 @@ do
             command+="--pareto-${j} ${path}/pareto/${instance}_${solver}_${seed}.txt "
             command+="--hvr-${j} ${path}/hvr/${instance}_${solver}_${seed}.txt "
             command+="--hvr-snapshots-${j} ${path}/hvr_snapshots/${instance}_${solver}_${seed}.txt "
-            command+="--nigd-plus-${j} ${path}/igd_plus/${instance}_${solver}_${seed}.txt "
-            command+="--nigd-plus-snapshots-${j} ${path}/igd_plus_snapshots/${instance}_${solver}_${seed}.txt "
+            command+="--nigd-plus-${j} ${path}/nigd_plus/${instance}_${solver}_${seed}.txt "
+            command+="--nigd-plus-snapshots-${j} ${path}/nigd_plus_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/${instance}_${solver}_${seed}_ "
             command+="--num-non-dominated-snapshots-${j} ${path}/num_non_dominated_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--populations-snapshots-${j} ${path}/populations_snapshots/${instance}_${solver}_${seed}_ "
@@ -412,9 +412,6 @@ for instance in ${instances[@]}
 do
     for version in ${versions[@]}
     do
-        echo "Instance ${instance}"
-        echo "Version ${version}"
-
         ffmpeg -y -r 5 -i ${path}/best_solutions_snapshots/${instance}_${version}_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/best_solutions_snapshots/${instance}_${version}.mp4 &
         ffmpeg -y -r 5 -i ${path}/populations_snapshots/${instance}_${version}_%d.png -c:v libx264 -vf fps=60 -pix_fmt yuv420p ${path}/populations_snapshots/${instance}_${version}.mp4
 
@@ -434,7 +431,7 @@ ffmpeg -y -r 5 -i ${path}/metrics_snapshots/scatter_%d.png -c:v libx264 -vf fps=
 
 wait
 
-rm ${path}/hvr_snapsehots/snapshot_*.png &
+rm ${path}/hvr_snapshots/snapshot_*.png &
 rm ${path}/nigd_plus_snapshots/snapshot_*.png &
 rm ${path}/metrics_snapshots/raincloud_*.png &
 rm ${path}/metrics_snapshots/scatter_*.png
