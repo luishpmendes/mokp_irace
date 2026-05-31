@@ -7,18 +7,66 @@ This folder contains iRace configurations for **offline algorithm configuration*
 | Algorithm | Scenario File | Parameters File | Target Runner |
 |-----------|---------------|-----------------|---------------|
 | NSGA-II   | `nsga2-scenario.txt` | `nsga2-parameters.txt` | `nsga2-tunner.sh` |
-| NS-BRKGA  | `nsbrkga-scenario.txt` | `nsbrkga-parameters.txt` | `nsbrkga-tunner.sh` |
+| NS-BRKGA (legacy) | `nsbrkga-scenario.txt` | `nsbrkga-parameters.txt` | `nsbrkga-tunner.sh` |
+| NS-BRKGA Stage 1 | `nsbrkga-scenario-stage1.txt` | `nsbrkga-parameters-stage1.txt` | `nsbrkga-tunner-stage1.sh` |
+| NS-BRKGA Stage 2 | `nsbrkga-scenario-stage2.txt` | `nsbrkga-parameters-stage2.txt` | `nsbrkga-tunner-stage2.sh` |
+| NS-BRKGA Stage 3 | `nsbrkga-scenario-stage3.txt` | `nsbrkga-parameters-stage3.txt` | `nsbrkga-tunner-stage3.sh` |
+| NS-BRKGA Stage 4 | `nsbrkga-scenario-stage4.txt` | `nsbrkga-parameters-stage4.txt` | `nsbrkga-tunner-stage4.sh` |
+| NS-BRKGA Stage 5 | `nsbrkga-scenario-stage5.txt` | `nsbrkga-parameters-stage5.txt` | `nsbrkga-tunner-stage5.sh` |
+| NS-BRKGA Stage 6 | `nsbrkga-scenario-stage6.txt` | `nsbrkga-parameters-stage6.txt` | `nsbrkga-tunner-stage6.sh` |
 | MOEA/D    | `moead-scenario.txt` | `moead-parameters.txt` | `moead-tunner.sh` |
 | NSPSO     | `nspso-scenario.txt` | `nspso-parameters.txt` | `nspso-tunner.sh` |
 | IHS       | `ihs-scenario.txt` | `ihs-parameters.txt` | `ihs-tunner.sh` |
 | MHACO     | `mhaco-scenario.txt` | `mhaco-parameters.txt` | `mhaco-tunner.sh` |
+
+## NS-BRKGA Ablation Study
+
+The NS-BRKGA ablation study uses a **six-stage feature ladder** to incrementally unlock NS-BRKGA mechanisms. Each stage has its own parameter file, scenario file, and target runner:
+
+| Stage | Feature Unlocked | Key Parameters Added |
+|-------|-----------------|---------------------|
+| 1 — Vanilla | Baseline: single pop, fixed elite size | `elites_percentage` (synthetic, mapped to min+max) |
+| 2 — Dynamic Elite + Diversity | Dynamic elite sizing, diversity-aware selection | `min/max_elites_percentage`, `diversity_type` |
+| 3 — Multiple Populations | Multi-population with exchange | `num_populations`, `exchange_interval`, `num_exchange_individuals` |
+| 4 — Path Relinking | Path relinking between elites | `pr_type`, `pr_dist_func`, `pr_percentage`, `pr_interval` |
+| 5 — Shaking | Population shaking | `shake_interval`, `shake_intensity`, `shake_distribution` |
+| 6 — Full NS-BRKGA | Partial reset (all features on) | `reset_interval`, `reset_intensity` + `shake < reset` constraint |
+
+### Instance Split
+
+- **`train-instances.txt`** — Training instances for iRace tuning (same as `instances.txt`)
+- **`test-instances.txt`** — Held-out instances for independent validation via `testing_fromlog()`
+
+### Running the Ablation
+
+Run all six stages (plus all other solvers) in parallel with testing:
+```bash
+cd irace
+chmod +x *-tunner*.sh irace_runner.sh
+./irace_runner.sh
+```
+
+Run a single stage:
+```bash
+cd irace
+Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsbrkga-scenario-stage1.txt'))"
+```
+
+Dry-run validation:
+```bash
+cd irace
+irace --check --scenario nsbrkga-scenario-stage1.txt
+```
 
 ## Folder Contents
 
 - **`*-scenario.txt`** — iRace scenario configuration (paths, budget, log file)
 - **`*-parameters.txt`** — Parameter space definition (name, switch, type, range, constraints)
 - **`*-tunner.sh`** — Target runner script that iRace calls to evaluate a configuration
-- **`instances.txt`** — List of training instance filenames (one per line)
+- **`instances.txt`** — List of training instance filenames (legacy, one per line)
+- **`train-instances.txt`** — Training instances for staged ablation
+- **`test-instances.txt`** — Held-out test instances for staged ablation
+- **`irace_runner.sh`** — Orchestration script: parallel tuning + sequential testing
 
 ## Prerequisites
 

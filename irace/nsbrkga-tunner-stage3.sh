@@ -1,6 +1,9 @@
 #!/bin/bash
+export LC_NUMERIC=C
 ###############################################################################
-# NS-BRKGA Target Runner for iRace
+# NS-BRKGA Ablation — Stage 3 Target Runner for iRace
+#
+# Multiple populations.
 ###############################################################################
 
 CONFIG_ID="$1"
@@ -13,7 +16,7 @@ PARAMS=("$@")
 PROJECT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 SOLVER="${PROJECT_DIR}/bin/exec/nsbrkga_solver_exec"
 HV_CALC="${PROJECT_DIR}/bin/exec/hypervolume_calculator_exec"
-TIME_LIMIT=300
+TIME_LIMIT=900
 
 TMPDIR=$(mktemp -d)
 trap "rm -rf $TMPDIR" EXIT
@@ -37,9 +40,6 @@ while [ $i -lt ${#PARAMS[@]} ]; do
 done
 
 START_TIME=$(date +%s.%N)
-
-# Print command that will be executed
-# echo "$SOLVER --instance \"$INSTANCE\" --seed \"$SEED\" --time-limit \"$TIME_LIMIT\" ${TRANSFORMED_PARAMS[@]}"
 
 "$SOLVER" \
     --instance "$INSTANCE" \
@@ -69,7 +69,7 @@ if [ ! -f "$HV_FILE" ]; then
     exit 0
 fi
 
-HV=$(cat "$HV_FILE")
-COST=$(echo "-$HV" | bc -l)
+HV=$(tr -d '[:space:]' < "$HV_FILE")
+COST=$(awk -v hv="$HV" 'BEGIN { printf "%.17g", -hv }')
 
 echo "$COST $ELAPSED_INT"
