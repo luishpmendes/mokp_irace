@@ -26,7 +26,10 @@ int main (int argc, char * argv[]) {
 
         mokp::NSBRKGA_Solver solver(instance);
 
-        if(arg_parser.option_exists("--decoder_type")) {
+        if(arg_parser.option_exists("--decoder-type")) {
+            solver.decoder_type = std::stoul(arg_parser.option_value("--decoder-type"));
+        } else if(arg_parser.option_exists("--decoder_type")) {
+            // Deprecated alias kept for backward compatibility.
             solver.decoder_type = std::stoul(arg_parser.option_value("--decoder_type"));
         }
 

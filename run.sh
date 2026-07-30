@@ -258,57 +258,6 @@ eval $final_command
 
 wait
 
-# commands=()
-
-# for ((i=0;i<num_processes;i++))
-# do
-#     commands[$i]="("
-# done
-
-# i=0
-
-# for instance in ${instances[@]}
-# do
-#     command="${path}/bin/exec/multiplicative_epsilon_calculator_exec "
-#     command+="--instance ${path}/instances/${instance}.txt "
-#     command+="--reference-pareto ${path}/pareto/${instance}.txt "
-#     j=0;
-#     for solver in ${solvers[@]}
-#     do
-#         for seed in ${seeds[@]}
-#         do
-#             command+="--pareto-${j} ${path}/pareto/${instance}_${solver}_${seed}.txt "
-#             command+="--best-solutions-snapshots-${j} ${path}/best_solutions_snapshots/${instance}_${solver}_${seed}_ "
-#             command+="--multiplicative-epsilon-${j} ${path}/multiplicative_epsilon/${instance}_${solver}_${seed}.txt "
-#             command+="--multiplicative-epsilon-snapshots-${j} ${path}/multiplicative_epsilon_snapshots/${instance}_${solver}_${seed}.txt "
-#             j=$((j+1))
-#         done
-#     done
-#     if [ $i -lt $num_processes ]
-#     then
-#         commands[$i]+="$command"
-#     else
-#         commands[$((i%num_processes))]+=" && $command"
-#     fi
-#     i=$((i+1))
-# done
-
-# for ((i=0;i<num_processes;i++))
-# do
-#     commands[$i]+=") &>> ${path}/log_${i}.txt"
-# done
-
-# final_command=""
-
-# for ((i=0;i<num_processes;i++))
-# do
-#     command=${commands[$i]}
-#     final_command+="$command & "
-# done
-
-# eval $final_command
-
-# wait
 
 commands=()
 
@@ -327,7 +276,7 @@ do
         command+="--hvrs ${path}/hvr/${instance}_${solver}.txt "
         command+="--hvr-statistics ${path}/hvr/${instance}_${solver}_stats.txt "
         command+="--nigd-pluses ${path}/nigd_plus/${instance}_${solver}.txt "
-        command+="--nigd-pluses-statistics ${path}/nigd_plus/${instance}_${solver}_stats.txt "
+        command+="--nigd-plus-statistics ${path}/nigd_plus/${instance}_${solver}_stats.txt "
         command+="--statistics-best ${path}/statistics/${instance}_${solver}_best.txt "
         command+="--statistics-median ${path}/statistics/${instance}_${solver}_median.txt "
         command+="--pareto-best ${path}/pareto/${instance}_${solver}_best.txt "
