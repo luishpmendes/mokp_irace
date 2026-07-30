@@ -184,7 +184,7 @@ int main (int argc, char * argv[]) {
 
         if(arg_parser.option_exists("--reset-intensity")) {
             solver.reset_intensity =
-                std::stoul(arg_parser.option_value("--reset-intensity"));
+                std::stod(arg_parser.option_value("--reset-intensity"));
         }
 
         if(arg_parser.option_exists("--num-threads")) {
