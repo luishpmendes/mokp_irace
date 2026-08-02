@@ -1,8 +1,9 @@
 instances = ["zlt_100_2", "zlt_250_2", "zlt_500_2", "zlt_750_2", "zlt_1000_2",
              "zlt_100_3", "zlt_250_3", "zlt_500_3", "zlt_750_3", "zlt_1000_3",
              "zlt_100_4", "zlt_250_4", "zlt_500_4", "zlt_750_4", "zlt_1000_4"]
-solvers = ["nsga2", "nspso", "moead", "mhaco", "ihs", "nsbrkga"]
+solvers = ["nsga2", "nsga3", "nspso", "moead", "mhaco", "ihs", "nsbrkga"]
 solver_labels = {"nsga2": "NSGA-II",
+                 "nsga3": "NSGA-III",
                  "nspso": "NSPSO",
                  "moead": "MOEA/D-DE",
                  "mhaco": "MHACO",

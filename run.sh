@@ -1,7 +1,7 @@
 #!/bin/bash
 
 instances=(zlt_100_2 zlt_250_2 zlt_500_2 zlt_750_2 zlt_1000_2 zlt_100_3 zlt_250_3 zlt_500_3 zlt_750_3 zlt_1000_3 zlt_100_4 zlt_250_4 zlt_500_4 zlt_750_4 zlt_1000_4)
-solvers=(nsga2 nspso moead mhaco ihs nsbrkga)
+solvers=(nsga2 nsga3 nspso moead mhaco ihs nsbrkga)
 seeds=(305089489 511812191 608055156 467424509 944441939 414977408 819312498 562386085 287613914 755772793)
 versions=(best median)
 
@@ -57,6 +57,10 @@ do
             command+="--num-non-dominated-snapshots ${path}/num_non_dominated_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--num-fronts-snapshots ${path}/num_fronts_snapshots/${instance}_${solver}_${seed}.txt "
             command+="--populations-snapshots ${path}/populations_snapshots/${instance}_${solver}_${seed}_ "
+            if [ $solver = "nsga3" ]
+            then
+                command+="--memory "
+            fi
             if [ $solver = "nspso" ]
             then
                 command+="--memory "
@@ -101,7 +105,7 @@ eval $final_command
 
 wait
 
-solvers=(nsga2 nspso moead mhaco ihs nsbrkga)
+solvers=(nsga2 nsga3 nspso moead mhaco ihs nsbrkga)
 
 commands=()
 

@@ -7,6 +7,7 @@ This folder contains iRace configurations for **offline algorithm configuration*
 | Algorithm | Scenario File | Parameters File | Target Runner |
 |-----------|---------------|-----------------|---------------|
 | NSGA-II   | `nsga2-scenario.txt` | `nsga2-parameters.txt` | `nsga2-tunner.sh` |
+| NSGA-III  | `nsga3-scenario.txt` | `nsga3-parameters.txt` | `nsga3-tunner.sh` |
 | NS-BRKGA Stage 1 | `nsbrkga-scenario-stage1.txt` | `nsbrkga-parameters-stage1.txt` | `nsbrkga-tunner-stage1.sh` |
 | NS-BRKGA Stage 2 | `nsbrkga-scenario-stage2.txt` | `nsbrkga-parameters-stage2.txt` | `nsbrkga-tunner-stage2.sh` |
 | NS-BRKGA Stage 3 | `nsbrkga-scenario-stage3.txt` | `nsbrkga-parameters-stage3.txt` | `nsbrkga-tunner-stage3.sh` |
@@ -103,6 +104,11 @@ Run tuning from inside the `irace/` directory:
 Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsga2-scenario.txt'))"
 ```
 
+**NSGA-III:**
+```bash
+Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsga3-scenario.txt'))"
+```
+
 **NS-BRKGA (one ablation stage, N = 1..6):**
 ```bash
 Rscript -e "library(irace); irace::irace_cmdline(c('--scenario','nsbrkga-scenario-stage1.txt'))"
@@ -125,6 +131,21 @@ where `type` is: `i` (integer), `r` (real), `c` (categorical).
 ### NSGA-II Parameters
 - **`population_size_factor`**: The runner multiplies this by 4 → actual `population_size` (range 100–500).
 - Other params: `crossover_probability`, `crossover_distribution`, `mutation_probability`, `mutation_distribution`.
+
+### NSGA-III Parameters
+- Same five parameters as NSGA-II, plus **`divisions`** — the number of divisions per objective
+  used to build the reference-point hyperplane.
+- NSGA-III generates `C(m + divisions - 1, divisions)` reference points for an `m`-objective
+  instance and requires **`population_size > that count`**, on top of the usual
+  **`population_size` divisible by 4** (which `population_size_factor × 4` guarantees).
+- The `[forbidden]` rule
+  `population_size_factor * 4 <= choose(4 + divisions - 1, divisions)`
+  evaluates that bound at `m = 4`, the largest objective count in the instance set
+  (`zlt_*_4`), so no sampled configuration can be rejected on any instance.
+- `nsga3-tunner.sh` always passes `--memory`, matching how `run.sh` invokes the solver, so
+  tuning and the final experiments use the same algorithm configuration.
+- The solver validates all of the above itself and aborts with an explicit message rather than
+  running an invalid configuration.
 
 ### NS-BRKGA Parameters
 - Uses the same `population_size_factor` convention.
