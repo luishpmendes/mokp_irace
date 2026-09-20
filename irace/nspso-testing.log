@@ -1,0 +1,20 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-09-20 09:40:53 UTC: Testing configurations (in no particular order): 410 400 409
+    population_size_factor omega   c1   c2  chi v_coeff leader_selection_range
+410                    113  0.06 1.82 1.60 1.00    0.44                     13
+400                    125  0.09 1.60 1.40 1.10    0.50                     12
+409                    108  0.06 1.56 1.59 1.02    0.45                     13
+    diversity_mechanism
+410   crowding distance
+400   crowding distance
+409   crowding distance
+# 2026-09-20 10:25:57 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          410          400          409
+1t 1526214327 -1.53336e+18 -1.59101e+18 -1.53281e+18
+2t  682688620 -2.29268e+13 -2.22691e+13 -2.25784e+13
+3t 1731942188 -7.11681e+15 -7.16252e+15 -7.06825e+15
+# 2026-09-20 10:25:57 UTC: Finished testing
+[1] TRUE

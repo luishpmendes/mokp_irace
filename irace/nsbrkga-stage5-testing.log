@@ -1,0 +1,36 @@
+
+
+# Testing of elite configurations: 5 
+# Testing iteration configurations: 0 
+# 2026-09-20 09:40:53 UTC: Testing configurations (in no particular order): 286 300 227
+    population_size_factor min_elites_percentage max_elites_percentage
+286                    109                  0.02                  0.15
+300                    119                  0.03                  0.28
+227                    103                  0.03                  0.07
+    mutation_probability mutation_distribution num_total_parents
+286                 0.11                 13.66                 3
+300                 0.43                 48.49                 2
+227                 0.15                 16.95                 2
+    num_elite_parents bias_type diversity_type crossover_type num_populations
+286                 1         2              3              0               5
+300                 1         1              0              0               5
+227                 1         2              3              0               5
+    exchange_interval num_exchange_individuals pr_type pr_dist_func
+286                23                       71       2            0
+300                24                       62       1            1
+227                16                       66       2            0
+    pr_percentage pr_interval shake_interval shake_intensity shake_distribution
+286          0.06         575            239            0.39              76.25
+300          0.65         719            685            0.96              67.30
+227          0.23         603            216            0.39              88.75
+    reset_interval
+286              0
+300              0
+227              0
+# 2026-09-20 10:25:59 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          286          300          227
+1t  862054013 -1.13868e+18 -1.48733e+18 -1.04294e+18
+2t 1753025773 -2.01961e+13 -2.19854e+13 -2.00633e+13
+3t  214515027 -6.20377e+15 -6.44748e+15 -5.81980e+15
+# 2026-09-20 10:25:59 UTC: Finished testing
+[1] TRUE
