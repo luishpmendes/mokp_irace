@@ -13,24 +13,24 @@ class NSPSO_Solver : public Solver {
     /*******************************
      * Size of the population.
      *******************************/
-    unsigned population_size = 300;
+    unsigned population_size = 452;
 
     /*****************************
      * Particles' inertia weight.
      *****************************/
-    double omega = 0.6;
+    double omega = 0.06;
 
     /**************************************************************
      * Magnitude of the force, applied to the particle’s velocity,
      * in the direction of its previous best position.
      **************************************************************/
-    double c1 = 2.0;
+    double c1 = 1.82;
 
     /**************************************************************
      * Magnitude of the force, applied to the particle’s velocity,
      * in the direction of its global best (i.e., leader).
      **************************************************************/
-    double c2 = 2.0;
+    double c2 = 1.60;
 
     /***************************
      * Velocity scaling factor.
@@ -41,14 +41,14 @@ class NSPSO_Solver : public Solver {
      * Velocity coefficient
      * (determining the maximum allowed particle velocity).
      *******************************************************/
-    double v_coeff = 0.5;
+    double v_coeff = 0.44;
 
     /****************************************************************
      * Leader selection range parameter
      * (i.e., the leader of each particle is selected among the best
      * leader_selection_range % individuals).
      ****************************************************************/
-    unsigned leader_selection_range = 60;
+    unsigned leader_selection_range = 13;
 
     /**************************************************************************
      * The diversity mechanism used to maintain diversity on the Pareto front.

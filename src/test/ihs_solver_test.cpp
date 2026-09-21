@@ -39,15 +39,15 @@ int main() {
         assert(solver.max_num_solutions == 128);
         assert(solver.population_size == 32);
         assert(solver.max_num_snapshots == 16);
-        assert(fabs(solver.phmcr - 0.85) <
+        assert(fabs(solver.phmcr - 0.985368) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.ppar_min - 0.35) <
+        assert(fabs(solver.ppar_min - 0.19737) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.ppar_max - 0.99) <
+        assert(fabs(solver.ppar_max - 0.728174) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.bw_min - 1E-5) <
+        assert(fabs(solver.bw_min - 0.021088) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.bw_max - 1.0) <
+        assert(fabs(solver.bw_max - 0.338321) <
             std::numeric_limits<double>::epsilon());
 
         solver.solve();

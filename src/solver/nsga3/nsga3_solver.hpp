@@ -13,33 +13,33 @@ class NSGA3_Solver : public Solver {
     /*******************************
      * Size of the population.
      *******************************/
-    unsigned population_size = 300;
+    unsigned population_size = 412;
 
     /************************************
      * Crossover probability.
      ************************************/
-    double crossover_probability = 0.95;
+    double crossover_probability = 0.51;
 
     /**************************************
      * Distribution index for crossover.
      **************************************/
-    double crossover_distribution = 10.00;
+    double crossover_distribution = 49.46;
 
     /************************************
      * Mutation probability.
      ************************************/
-    double mutation_probability = 0.01;
+    double mutation_probability = 0.04;
 
     /*************************************
      * Distribution index for mutation.
      *************************************/
-    double mutation_distribution = 50.00;
+    double mutation_distribution = 3.96;
 
     /**********************************************************
      * Number of divisions per objective used to generate the
      * reference point set.
      **********************************************************/
-    unsigned divisions = 6;
+    unsigned divisions = 10;
 
     /**********************************************************
      * Number of divisions per objective used to generate the

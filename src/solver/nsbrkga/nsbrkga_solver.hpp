@@ -14,48 +14,48 @@ class NSBRKGA_Solver : public Solver {
     /********************************************
      * Number of individuals in each population.
      ********************************************/
-    unsigned population_size = 300;
+    unsigned population_size = 488;
 
     /********************************************************************
      * Minimum percentage of individuals to become the elite set (0, 1].
      ********************************************************************/
-    double min_elites_percentage = 0.10;
+    double min_elites_percentage = 0.29;
 
     /********************************************************************
      * Maximum percentage of individuals to become the elite set (0, 1].
      ********************************************************************/
-    double max_elites_percentage = 0.30;
+    double max_elites_percentage = 0.33;
 
     /************************************
      * Mutation probability.
      ************************************/
-    double mutation_probability = 0.01;
+    double mutation_probability = 0.36;
 
     /************************************
      * Mutation distribution.
      ************************************/
-    double mutation_distribution = 50.0;
+    double mutation_distribution = 31.89;
 
     /**************************************
      * Number of total parents for mating.
      **************************************/
-    unsigned num_total_parents = 3;
+    unsigned num_total_parents = 2;
 
     /**************************************
      * Number of elite parents for mating.
      **************************************/
-    unsigned num_elite_parents = 2;
+    unsigned num_elite_parents = 1;
 
     /**********************************************************************
      * Type of bias that will be used.
      **********************************************************************/
-    NSBRKGA::BiasFunctionType bias_type = NSBRKGA::BiasFunctionType::SQRT;
+    NSBRKGA::BiasFunctionType bias_type = NSBRKGA::BiasFunctionType::CUBIC;
 
     /*****************************************************************
      * Type of diversity that will be used.
      *****************************************************************/
     NSBRKGA::DiversityFunctionType diversity_type =
-        NSBRKGA::DiversityFunctionType::AVERAGE_DISTANCE_TO_CENTROID;
+        NSBRKGA::DiversityFunctionType::NONE;
 
     /**********************************************************************
      * Type of crossover that will be used.
@@ -66,18 +66,18 @@ class NSBRKGA_Solver : public Solver {
     /**********************************************
      * Number of independent parallel populations.
      **********************************************/
-    unsigned num_populations = 3;
+    unsigned num_populations = 5;
 
     /**************************************************************************
      * Interval at which the elite solutions are exchanged between populations
      * (0 means no exchange).
      **************************************************************************/
-    unsigned exchange_interval = 200;
+    unsigned exchange_interval = 338;
 
     /*******************************************************************
      * Number of elite individuals to be exchanged between populations.
      *******************************************************************/
-    unsigned num_exchange_individuals = 30;
+    unsigned num_exchange_individuals = 59;
 
     /**********************************************
      * Type of path relinking that will be used.
@@ -89,50 +89,50 @@ class NSBRKGA_Solver : public Solver {
      * Distance function that will be used in the path relinking.
      *************************************************************/
     std::shared_ptr<NSBRKGA::DistanceFunctionBase> pr_dist_func =
-        std::shared_ptr<NSBRKGA::DistanceFunctionBase>(
-            new NSBRKGA::EuclideanDistance());
+        NSBRKGA::make_distance_function(
+            NSBRKGA::DistanceFunctionType::KENDALL_TAU);
 
     /******************************************************************
      * Type of distance function used in path relinking.
      ******************************************************************/
     NSBRKGA::DistanceFunctionType pr_dist_func_type =
-        NSBRKGA::DistanceFunctionType::EUCLIDEAN;
+        NSBRKGA::DistanceFunctionType::KENDALL_TAU;
 
     /*****************************************
      * Percentage of the path to be computed.
      *****************************************/
-    double pr_percentage = 0.20;
+    double pr_percentage = 0.45;
 
     /***********************************************
      * Interval at which the path relink is applied
      * (0 means no path relinking).
      ***********************************************/
-    unsigned pr_interval = 500;
+    unsigned pr_interval = 443;
 
     /*********************************************************************
      * Interval at which the populations are shaken (0 means no shaking).
      *********************************************************************/
-    unsigned shake_interval = 200;
+    unsigned shake_interval = 565;
 
     /********************************
      * The intensity of the shaking.
      ********************************/
-    double shake_intensity = 0.33;
+    double shake_intensity = 0.95;
 
     /************************************
      * Shaking distribution.
      ************************************/
-    double shake_distribution = 20.0;
+    double shake_distribution = 80.79;
 
     /******************************************************************
      * Interval at which the populations are reset (0 means no reset).
      ******************************************************************/
-    unsigned reset_interval = 500;
+    unsigned reset_interval = 715;
 
     /******************************
      * The intensity of the reset.
      ******************************/
-    double reset_intensity = 0.20;
+    double reset_intensity = 0.39;
 
     /*********************************************************
      * Number of threads to be used during parallel decoding.

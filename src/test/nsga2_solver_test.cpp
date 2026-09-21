@@ -39,13 +39,13 @@ int main() {
         assert(solver.max_num_solutions == 128);
         assert(solver.population_size == 32);
         assert(solver.max_num_snapshots == 16);
-        assert(fabs(solver.crossover_probability - 0.95) <
+        assert(fabs(solver.crossover_probability - 0.80) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.crossover_distribution - 10.00) <
+        assert(fabs(solver.crossover_distribution - 69.30) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.mutation_probability - 0.01) <
+        assert(fabs(solver.mutation_probability - 0.02) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.mutation_distribution - 50.00) <
+        assert(fabs(solver.mutation_distribution - 3.21) <
             std::numeric_limits<double>::epsilon());
 
         solver.solve();

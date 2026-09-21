@@ -39,12 +39,12 @@ int main() {
         assert(solver.max_num_solutions == 128);
         assert(solver.population_size == 32);
         assert(solver.max_num_snapshots == 16);
-        assert(fabs(solver.omega - 0.6) < std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.c1 - 2.0) < std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.c2 - 2.0) < std::numeric_limits<double>::epsilon());
+        assert(fabs(solver.omega - 0.06) < std::numeric_limits<double>::epsilon());
+        assert(fabs(solver.c1 - 1.82) < std::numeric_limits<double>::epsilon());
+        assert(fabs(solver.c2 - 1.60) < std::numeric_limits<double>::epsilon());
         assert(fabs(solver.chi - 1.0) < std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.v_coeff - 0.5) < std::numeric_limits<double>::epsilon());
-        assert(solver.leader_selection_range == 60);
+        assert(fabs(solver.v_coeff - 0.44) < std::numeric_limits<double>::epsilon());
+        assert(solver.leader_selection_range == 13);
         assert(solver.diversity_mechanism == "crowding distance");
         assert(solver.memory);
 
