@@ -2,35 +2,47 @@
 
 # Testing of elite configurations: 5 
 # Testing iteration configurations: 0 
-# 2026-09-20 09:40:53 UTC: Testing configurations (in no particular order): 286 300 227
+# 2026-10-19 00:06:47 UTC: Testing configurations (in no particular order): 296 304 289 302 306
     population_size_factor min_elites_percentage max_elites_percentage
-286                    109                  0.02                  0.15
-300                    119                  0.03                  0.28
-227                    103                  0.03                  0.07
+296                    125                  0.09                  0.38
+304                    114                  0.16                  0.34
+289                    118                  0.27                  0.36
+302                    125                  0.17                  0.35
+306                    124                  0.17                  0.41
     mutation_probability mutation_distribution num_total_parents
-286                 0.11                 13.66                 3
-300                 0.43                 48.49                 2
-227                 0.15                 16.95                 2
+296                 0.34                 46.07                 2
+304                 0.14                 44.21                 2
+289                 0.14                 43.66                 2
+302                 0.33                 38.01                 2
+306                 0.15                 41.11                 2
     num_elite_parents bias_type diversity_type crossover_type num_populations
-286                 1         2              3              0               5
-300                 1         1              0              0               5
-227                 1         2              3              0               5
+296                 1         1              1              0               5
+304                 1         1              1              0               5
+289                 1         1              1              0               5
+302                 1         1              1              0               5
+306                 1         1              1              0               5
     exchange_interval num_exchange_individuals pr_type pr_dist_func
-286                23                       71       2            0
-300                24                       62       1            1
-227                16                       66       2            0
+296               115                       34       2            0
+304               230                       31       2            0
+289               216                       31       2            0
+302               105                       35       2            0
+306               140                       35       2            0
     pr_percentage pr_interval shake_interval shake_intensity shake_distribution
-286          0.06         575            239            0.39              76.25
-300          0.65         719            685            0.96              67.30
-227          0.23         603            216            0.39              88.75
+296          1.00         671            230            0.67              45.12
+304          1.00         638            347            0.70              49.85
+289          1.00         698            374            0.76              48.97
+302          1.00         661            219            0.60              29.44
+306          1.00         612            312            0.75              51.60
     reset_interval
-286              0
-300              0
-227              0
-# 2026-09-20 10:25:59 UTC: Testing results (column number is configuration ID in no particular order):
-        seeds          286          300          227
-1t  862054013 -1.13868e+18 -1.48733e+18 -1.04294e+18
-2t 1753025773 -2.01961e+13 -2.19854e+13 -2.00633e+13
-3t  214515027 -6.20377e+15 -6.44748e+15 -5.81980e+15
-# 2026-09-20 10:25:59 UTC: Finished testing
+296              0
+304              0
+289              0
+302              0
+306              0
+# 2026-10-19 00:46:48 UTC: Testing results (column number is configuration ID in no particular order):
+        seeds          296          304          289          302          306
+1t  495683551 -1.52984e+18 -1.57454e+18 -1.58591e+18 -1.51977e+18 -1.56559e+18
+2t 1427436840 -2.25032e+13 -2.20532e+13 -2.22451e+13 -2.24133e+13 -2.26717e+13
+3t  637990643 -6.61099e+15 -6.62524e+15 -6.56707e+15 -6.55899e+15 -6.61783e+15
+# 2026-10-19 00:46:48 UTC: Finished testing
 [1] TRUE
