@@ -1,7 +1,8 @@
 #!/bin/bash
 
 instances=(zlt_100_2 zlt_250_2 zlt_500_2 zlt_750_2 zlt_1000_2 zlt_100_3 zlt_250_3 zlt_500_3 zlt_750_3 zlt_1000_3 zlt_100_4 zlt_250_4 zlt_500_4 zlt_750_4 zlt_1000_4)
-solvers=(nsga2 nsga3 nspso moead mhaco ihs nsbrkga1 nsbrkga2 nsbrkga3 nsbrkga4 nsbrkga5 nsbrkga6)
+# solvers=(nsga2 nsga3 nspso moead mhaco ihs nsbrkga1 nsbrkga2 nsbrkga3 nsbrkga4 nsbrkga5 nsbrkga6)
+solvers=(nsbrkga1 nsbrkga2 nsbrkga3 nsbrkga4 nsbrkga5 nsbrkga6)
 seeds=(829249666 948391020 437349832 224971284 318762008 248020142 145603336 842216060 795652969 290822624 527829361 406480597 524127926 802682008 761754044 684835752 330881998 525728155 864672239 510218942 636182588 199650424 724231466 623485821 553462928 321870976 470702405 874358826 872284682 348372676 942314095)
 versions=(best median)
 
@@ -79,6 +80,17 @@ mkdir -p ${path}/nigd_plus_snapshots
 mkdir -p ${path}/metrics
 mkdir -p ${path}/metrics_snapshots
 
+# Snapshots are numbered files that every reader scans until the first missing
+# index, and a run may take fewer snapshots than the one it replaces, so the
+# rerun variants' old snapshot files are removed before they run.
+for instance in ${instances[@]}
+do
+    for solver in ${solvers[@]}
+    do
+        rm -f ${path}/best_solutions_snapshots/${instance}_${solver}_*.txt ${path}/populations_snapshots/${instance}_${solver}_*.txt
+    done
+done
+
 commands=()
 
 for ((i=0;i<num_processes;i++))
@@ -139,6 +151,18 @@ done
 eval $final_command
 
 wait
+
+solvers=(nsga2 nsga3 nspso moead mhaco ihs nsbrkga1 nsbrkga2 nsbrkga3 nsbrkga4 nsbrkga5 nsbrkga6)
+
+# The aggregator rewrites each solver's best/median snapshot copies; remove the
+# old ones so a shorter new copy leaves no stale trailing index.
+for instance in ${instances[@]}
+do
+    for solver in ${solvers[@]}
+    do
+        rm -f ${path}/best_solutions_snapshots/${instance}_${solver}_{best,median}_*.txt ${path}/populations_snapshots/${instance}_${solver}_{best,median}_*.txt
+    done
+done
 
 commands=()
 
