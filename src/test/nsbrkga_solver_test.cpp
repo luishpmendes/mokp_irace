@@ -44,36 +44,36 @@ int main() {
         assert(solver.max_num_solutions == 128);
         assert(solver.population_size == 32);
         assert(solver.max_num_snapshots == 16);
-        assert(fabs(solver.min_elites_percentage - 0.29) <
+        assert(fabs(solver.min_elites_percentage - 0.22) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.max_elites_percentage - 0.33) <
+        assert(fabs(solver.max_elites_percentage - 0.32) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.mutation_probability - 0.36) <
+        assert(fabs(solver.mutation_probability - 0.08) <
             std::numeric_limits<double>::epsilon());
-        assert(fabs(solver.mutation_distribution - 31.89) <
+        assert(fabs(solver.mutation_distribution - 38.60) <
             std::numeric_limits<double>::epsilon());
         assert(solver.num_total_parents == 2);
         assert(solver.num_elite_parents == 1);
-        assert(solver.bias_type == NSBRKGA::BiasFunctionType::CUBIC);
+        assert(solver.bias_type == NSBRKGA::BiasFunctionType::QUADRATIC);
         assert(solver.diversity_type ==
             NSBRKGA::DiversityFunctionType::NONE);
         assert(solver.crossover_type == NSBRKGA::CrossoverType::ROULETTE);
-        assert(solver.num_populations == 5);
+        assert(solver.num_populations == 4);
         assert(solver.exchange_interval == 20);
         assert(solver.num_exchange_individuals == 3);
         assert(solver.pr_type == NSBRKGA::PathRelinking::Type::BINARY_SEARCH);
         assert(typeid(*solver.pr_dist_func) ==
-                typeid(NSBRKGA::KendallTauDistance));
-        assert(fabs(solver.pr_percentage - 0.45) <
+                typeid(NSBRKGA::HammingDistance));
+        assert(fabs(solver.pr_percentage - 1.00) <
                 std::numeric_limits<double>::epsilon());
         assert(solver.pr_interval == 50);
         assert(solver.shake_interval == 20);
-        assert(fabs(solver.shake_intensity - 0.95) < 
+        assert(fabs(solver.shake_intensity - 0.49) < 
             std::numeric_limits<double>::epsilon());
-    assert(fabs(solver.shake_distribution - 80.79) < 
+    assert(fabs(solver.shake_distribution - 49.89) < 
             std::numeric_limits<double>::epsilon());
         assert(solver.reset_interval == 50);
-        assert(fabs(solver.reset_intensity - 0.39) <
+        assert(fabs(solver.reset_intensity - 0.24) <
             std::numeric_limits<double>::epsilon());
         assert(solver.num_threads == 1);
 
